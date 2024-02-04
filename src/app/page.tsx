@@ -6,6 +6,21 @@ import { OrbitControls, Stats, useTexture } from "@react-three/drei";
 import Lights from "../../components/Lights";
 import Ground from "../../components/Ground";
 
+import { useLoader } from "@react-three/fiber";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+
+const Tree = () => {
+  const model = useLoader(GLTFLoader, "./models/tree.glb");
+
+  model.scene.traverse((object) => {
+    if (object.isMesh) {
+      object.castShadow = true;
+    }
+  })
+
+  return <primitive object={model.scene} />;
+};
+
 const TexturedSpheres = () => {
   const map = useTexture("./textures/pavement_04_diff_1k.png");
   const normalMap = useTexture("./textures/pavement_04_nor_gl_1k.png");
@@ -35,6 +50,7 @@ const Home: NextPage = () => {
         {testing ? <gridHelper args={[10, 10]} /> : null}
         <OrbitControls />
         <TexturedSpheres />
+        <Tree />
         <Lights />
         <Ground />
       </Canvas>
