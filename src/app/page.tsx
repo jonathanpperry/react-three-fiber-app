@@ -1,17 +1,25 @@
 "use client";
+import { NextPage } from "next";
 import { Canvas } from "@react-three/fiber";
+// Relative
 import AnimatedBox from "../../components/AnimatedBox";
-import CameraOrbitController from "../../components/CameraOrbitController";
+import { OrbitControls, Stats } from "@react-three/drei";
 
-export default function Home() {
+const Home: NextPage = () => {
+  const testing = true;
+
   return (
     <div className="container">
       <Canvas>
-        <CameraOrbitController />
+        {testing ? <Stats /> : null}
+        {testing ? <axesHelper args={[2]} /> : null}
+        {testing ? <gridHelper args={[10, 10]} /> : null}
+        <OrbitControls />
         <ambientLight intensity={0.1} />
         <directionalLight color="red" position={[0, 0, 5]} />
-        <AnimatedBox />
+        <AnimatedBox isTesting={testing} />
       </Canvas>
     </div>
   );
-}
+};
+export default Home;
