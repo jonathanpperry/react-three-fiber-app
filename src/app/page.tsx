@@ -2,7 +2,6 @@
 import { NextPage } from "next";
 import { Canvas } from "@react-three/fiber";
 // Relative
-import AnimatedBox from "../../components/AnimatedBox";
 import { OrbitControls, Stats } from "@react-three/drei";
 
 const Home: NextPage = () => {
@@ -16,8 +15,11 @@ const Home: NextPage = () => {
         {testing ? <gridHelper args={[10, 10]} /> : null}
         <OrbitControls />
         <ambientLight intensity={0.1} />
-        <directionalLight color="red" position={[0, 0, 5]} />
-        <AnimatedBox isTesting={testing} />
+        <directionalLight position={[0, 0, 5]} />
+        <mesh scale={[0.5, 0.5, 0.5]}>
+          <boxGeometry />
+          <meshStandardMaterial color={"blue"} wireframe />
+        </mesh>
       </Canvas>
     </div>
   );
