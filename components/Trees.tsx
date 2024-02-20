@@ -10,7 +10,13 @@ const Trees = () => {
     }
   });
 
-  return <primitive object={model.scene} />;
+  return (
+    <group rotation={[0, 4, 0]}>
+      <object3D position={[2, 0, 0]}>
+        <primitive object={model.scene.clone()} />;
+      </object3D>
+    </group>
+  );
 };
 
 export default Trees;
